@@ -71,7 +71,7 @@ dbWriteTable(song_db, name="unique_tracks", unique_tracks, append=TRUE)
 dbGetQuery(song_db, "select * from unique_tracks")
 
 # ARTIST
-# create table unique_tracks to database song_db
-dbWriteTable(song_db, name="unique_tracks", unique_tracks, append=TRUE)
-dbGetQuery(song_db, "select * from unique_tracks")
+# create table unique_artists to database song_db
+dbWriteTable(song_db, name="unique_artists", unique_artists, append=TRUE)
+dbGetQuery(song_db, "select * from unique_artists")
 
