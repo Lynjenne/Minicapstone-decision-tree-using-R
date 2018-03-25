@@ -62,7 +62,7 @@ View(s2)
 # connect to database song_db
 song_db <-dbConnect(MySQL(), user="root", password="peromingan", host="35.224.141.246")
 #dbSendQuery(song_db, "DROP DATABASE song_db IF EXISTS;")
-dbSendQuery(song_db, "CREATE DATABASE song_db")
+#dbSendQuery(song_db, "CREATE DATABASE song_db")
 dbSendQuery(song_db, "USE song_db")
 
 # TRACKS
@@ -74,4 +74,19 @@ dbGetQuery(song_db, "select * from unique_tracks")
 # create table unique_artists to database song_db
 dbWriteTable(song_db, name="unique_artists", unique_artists, append=TRUE)
 dbGetQuery(song_db, "select * from unique_artists")
+
+# JAM
+# create table jam to database song_db
+dbWriteTable(song_db, name="jam", jam, append=TRUE)
+dbGetQuery(song_db, "select * from jam")
+
+# SONG_DATASET
+# create table song_dataset to database song_db
+dbWriteTable(song_db, name="song_dataset", s, append=TRUE)
+dbGetQuery(song_db, "select * from song_dataset")
+
+# SONG_DATASET2
+# create table song_dataset2 to database song_db
+dbWriteTable(song_db, name="song_dataset2", s2, append=TRUE)
+dbGetQuery(song_db, "select * from song_dataset2")
 
