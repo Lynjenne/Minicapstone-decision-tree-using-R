@@ -5,6 +5,7 @@ setwd("~/Master in Information Technology/Fourth Semester/IT380 - Introduction t
 install.packages("tm")
 install.packages("SnowballC")
 install.packages("arules")
+install.packages("dplyr")
 install.packages("RMySQL")
 
 # use library of installed packages
@@ -12,6 +13,7 @@ library('tm')
 library('SnowballC')
 library('stringr')
 library('arules')
+library("dplyr")
 library('RMySQL')
 
 # TRACKS
@@ -56,6 +58,8 @@ View(song_dataset2)
 drop_song_dataset2 <- c("X","artist.7digitalid","analysis.sample.rate","artist.playmeid","danceability","end.of.fade.in","energy","key","key.confidence","mode","mode.confidence","release.7digitalid","start.of.fade.out","tempo","time.signature","time.signature.confidence")
 # remove/drop selected columns names
 s2 = song_dataset2[,!(names(song_dataset2) %in% drop_song_dataset2)]
+# rename column names
+s2 = rename(s2, song_id = 'song.id', artist_familiarity = 'artist.familiarity', song_hotttnesss = 'song.hotttnesss')
 # view result data
 View(s2)
 
@@ -90,3 +94,11 @@ dbGetQuery(song_db, "select * from song_dataset")
 dbWriteTable(song_db, name="song_dataset2", s2, append=TRUE)
 dbGetQuery(song_db, "select * from song_dataset2")
 
+# Select user_id, track_id, song_id, artist_id, year in multitple tables using union
+dbGetQuery(song_db, "(select * from jam AS j JOIN unique_tracks AS ut ON ut.track_id = j.track_id) 
+                      JOIN 
+                     (select song_dataset.song_id, song_dataset.artist_id, song_dataset.artist_name from song_dataset AS sd JOIN song_dataset2 AS sd2 ON sd2.song_id = sd.song_id)
+                      JOIN
+                      (select ua.artist_id, ua.track_id, ua.artist_name from unique_artists AS ua)")
+
+a <- dbGetQuery(song_db, "select song_id, year from song_dataset2")
