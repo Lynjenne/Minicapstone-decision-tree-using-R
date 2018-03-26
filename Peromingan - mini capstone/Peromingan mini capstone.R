@@ -4,9 +4,14 @@ setwd("~/Master in Information Technology/Fourth Semester/IT380 - Introduction t
 # install needed packages for running some codes
 install.packages("tm")
 install.packages("SnowballC")
+install.packages("stringr")
 install.packages("arules")
 install.packages("dplyr")
 install.packages("RMySQL")
+install.packages("data.tree")
+install.packages("rpart")
+install.packages("rpart.plot")
+install.packages("RWeka")
 
 # use library of installed packages
 library('tm')
@@ -15,6 +20,10 @@ library('stringr')
 library('arules')
 library("dplyr")
 library('RMySQL')
+library("data.tree")
+library("rpart")
+library("rpart.plot")
+library("RWeka")
 
 # TRACKS
 # read data from file
